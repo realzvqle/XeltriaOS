@@ -2,17 +2,14 @@
 #include "uart.h"
 #include "rng.h"
 #include "kistdlib.h"
-
+#include "malloc.h"
 
 
 
 
 void KiEntry(void) {
-    while(1){
-        char buffer[512];
-        KiItoA(KiGenerateRandomValueWithinRange(KiGetTimerValue(), 0, 1000), buffer);
-        KiSerialPrint(buffer);
-        KiSerialPrint("\n");
-        KiSleep(1);
-    }
+    KiInitializeHeap();
+    char* idk = KiSerialGets(1024);
+    KiSerialPrint(idk);
+    KiFreeMemory(idk);
 }

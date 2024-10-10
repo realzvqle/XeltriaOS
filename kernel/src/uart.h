@@ -9,5 +9,7 @@
 
 void KiSerialPutChar(char c) ;
 void KiSerialPrint(const char *s);
+char KiSerialGetChar();
+char* KiSerialGets(int size);
 
 #endif

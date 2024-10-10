@@ -29,7 +29,6 @@ void KiWrite32(volatile uint32_t* addr, uint32_t value) {
 }
 
 
-
 uint64_t KiRead64(volatile uint64_t* addr) {
     return *((volatile uint64_t *) addr);
 }
