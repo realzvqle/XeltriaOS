@@ -1,5 +1,5 @@
-#ifndef SERIAL_H_INCLUDED
-#define SERIAL_H_INCLUDED
+#ifndef UART_H_INCLUDED
+#define UART_H_INCLUDED
 
 
 
