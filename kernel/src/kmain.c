@@ -9,7 +9,8 @@ void KiEntry(void) {
     
     uint8_t color[3];
     KiCreateRGB(color, 255, 60, 90);
-    KiDrawRect(10, 10, 100, 100, color);
+    //KiDrawRect(10, 10, 100, 100, color);
+    KiDrawText(10, 10, "Hi!!!", 1, color);
     while(1) continue;
 }
 
