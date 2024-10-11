@@ -1,13 +1,17 @@
-#include "uart.h"
-#include "malloc.h"
+#include "drawing.h"
+#include "ramfb.h"
 
-extern void test();
 
+fb_info fb;
 
 void KiEntry(void) {
-    test();
-    KiSerialPrint("Hi!!");
-    char* idk = KiSerialGets(1024);
-    KiSerialPrint(idk);
-    KiFreeMemory(idk);
+    
+    
+    uint8_t color[3];
+    KiCreateRGB(color, 255, 60, 90);
+    KiDrawRect(10, 10, 100, 100, color);
+    while(1) continue;
 }
+
+
+

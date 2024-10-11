@@ -13,4 +13,4 @@ clean:
 
 run:
 	make all
-	qemu-system-aarch64 -machine virt -cpu cortex-a57 -kernel kernel/kernel.elf -display sdl -serial mon:stdio 
+	qemu-system-aarch64 -machine virt -cpu cortex-a57 -kernel kernel/kernel.elf -device ramfb -display sdl -serial mon:stdio 
