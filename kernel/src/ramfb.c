@@ -7,6 +7,8 @@ static volatile uint16_t *baseaddrsel = (uint16_t*)0x9020008;
 
 extern fb_info fb;
 
+// thanks to https://github.com/luickk/qemu-ramfb-aarch64-driver for the help!
+
 static inline void QemuCFGDMATransfer(void* address, uint32_t length, uint32_t control){
     QemuCfgDmaAccess access = {.address = KiBSwap64((uint64_t)address), .length = KiBSwap32(length), .control = KiBSwap32(control)};
     if(length == 0){
