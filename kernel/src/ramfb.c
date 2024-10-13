@@ -1,5 +1,6 @@
 #include "ramfb.h"
 #include "mmio.h"
+#include "superheader.h"
 #include <stdint.h>
 
 
@@ -61,8 +62,8 @@ static inline int CheckCFGDMA(){
 void KiSetupFramebuffer(){
     extern uint64_t stack_beginning;
     uint64_t heap_start = (uint64_t)&stack_beginning;
-    uint32_t fb_width = 800;
-    uint32_t fb_height = 600;
+    uint32_t fb_width = WIDTH;
+    uint32_t fb_height = HEIGHT;
     uint32_t fb_bpp = 4;
     uint32_t fb_stride = fb_bpp * fb_width;
     fb = (fb_info){

@@ -1,16 +1,24 @@
-#include "drawing.h"
+#include "error.h"
 #include "ramfb.h"
-
-
+#include "terminal.h"
+#include "timer.h"
+#include "rng.h"
+#include "kistdlib.h"
 fb_info fb;
 
+void KiCheckSystemIntegrity();
+
+
 void KiEntry(void) {
+    KiPanic("System Error Acc");
+    while(1){
+        int i = KiGenerateRandomValueWithinRange(KiGetTimerValue(), 0, 10000);
+        char buffer[512];
+        KiItoA(i, buffer);
+        KiTerminalPrint(buffer);
+        KiSleep(1);
+    }
     
-    
-    uint8_t color[3];
-    KiCreateRGB(color, 255, 60, 90);
-    //KiDrawRect(10, 10, 100, 100, color);
-    KiDrawText(10, 10, "Hi!!!", 1, color);
     while(1) continue;
 }
 
