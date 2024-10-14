@@ -1,4 +1,5 @@
 #include "error.h"
+#include "uart.h"
 #include "ramfb.h"
 #include "terminal.h"
 #include "timer.h"
@@ -11,6 +12,7 @@ void KiCheckSystemIntegrity();
 
 void KiEntry(void) {
     KiPanic("System Error Acc");
+   
     while(1){
         int i = KiGenerateRandomValueWithinRange(KiGetTimerValue(), 0, 10000);
         char buffer[512];

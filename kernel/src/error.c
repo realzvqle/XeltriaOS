@@ -4,7 +4,7 @@
 #include "uart.h"
 
 
-
+extern void KiHaltSystem();
 
 void KiPanic(char* error){
     uint8_t crashttext[3];
@@ -16,8 +16,7 @@ void KiPanic(char* error){
     KiDrawText(20, 20, ":( OS CRASHED", 1, crashttext);
     KiDrawText(20, 60, error, 1, crashttext);
 
-    __asm__ ("wfi");
-    while(1) continue;
+    KiHaltSystem();
 }
 
 // void KiDataAbortHandler(void) {
