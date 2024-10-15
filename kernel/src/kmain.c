@@ -1,4 +1,5 @@
 #include "error.h"
+#include "loading.h"
 #include "uart.h"
 #include "ramfb.h"
 #include "terminal.h"
@@ -11,16 +12,7 @@ void KiCheckSystemIntegrity();
 
 
 void KiEntry(void) {
-    KiPanic("System Error Acc");
-   
-    while(1){
-        int i = KiGenerateRandomValueWithinRange(KiGetTimerValue(), 0, 10000);
-        char buffer[512];
-        KiItoA(i, buffer);
-        KiTerminalPrint(buffer);
-        KiSleep(1);
-    }
-    
+    KiDrawLoadingScreen();
     while(1) continue;
 }
 

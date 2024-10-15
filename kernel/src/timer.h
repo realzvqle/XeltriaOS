@@ -8,11 +8,10 @@
 #include "superheader.h"
 
 
-void sleep(uint32_t seconds);
 void KiSleep(uint32_t seconds);
 uint32_t KiGetTimerValue();
-
-
+uint64_t KiGetCounterValue();
+uint64_t KiGetCounterFrequency();
 
 
 #endif
