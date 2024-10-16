@@ -14,7 +14,7 @@ _loader:
     bl KiSetupRamFB
     mov x1, #1
     cmp x0, x1
-    b.eq error
+    b.eq error_ramfb
     bl KiEntry
 
     b .
@@ -22,8 +22,8 @@ _loader:
 
 
 
-error:
-    ldr x0, =error_message
+error_ramfb:
+    ldr x0, =error_message_ramfb
     bl KiSerialPrint
     b .
 
@@ -33,7 +33,7 @@ message:
 
 
 
-error_message:
-    .asciz "An Error Happened While Loading the System!\n"
+error_message_ramfb:
+    .asciz "The RamFB Driver Failed to Load, Make sure you have the device installed.\n"
 
 

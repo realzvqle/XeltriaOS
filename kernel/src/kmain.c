@@ -1,18 +1,21 @@
-#include "error.h"
-#include "loading.h"
-#include "uart.h"
+#include "patterns.h"
 #include "ramfb.h"
 #include "terminal.h"
-#include "timer.h"
-#include "rng.h"
-#include "kistdlib.h"
+#include "uart.h"
+
+
 fb_info fb;
 
-void KiCheckSystemIntegrity();
+extern void KiJumpToUserMode();
 
 
 void KiEntry(void) {
-    KiDrawLoadingScreen();
+    //KiSetupExceptionVectorTable();
+    KiJumpToUserMode();
+    //KiSerialPrint("");
+
+    // will never be reached
+    KiTerminalPrint("Hi!");
     while(1) continue;
 }
 

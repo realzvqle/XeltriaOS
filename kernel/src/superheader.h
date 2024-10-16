@@ -11,8 +11,8 @@
 #include <stddef.h>
 
 
-#define WIDTH 2880   
-#define HEIGHT 1880
+#define WIDTH 800   
+#define HEIGHT 600
 
 
 #endif
