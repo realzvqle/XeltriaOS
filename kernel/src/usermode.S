@@ -12,10 +12,11 @@ KiJumpToUserMode:
     msr SP_EL0, x1                       
     ldp x29, x30, [sp], #16              
     eret           
-    
-                          
+
+
 
 user_program_entry:
+    
     bl UserModeInit
     b .
                             
