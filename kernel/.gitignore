@@ -1,3 +1,5 @@
-kernel.elf
+kernel.exe
 *.o
 obj/
+.xmake/
+build/

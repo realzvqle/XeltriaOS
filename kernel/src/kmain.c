@@ -11,7 +11,6 @@ extern void KiJumpToUserMode();
 
 void KiEntry(void) {
     //KiSetupExceptionVectorTable();
-    KiJumpToUserMode();
     //KiSerialPrint("");
 
     // will never be reached
