@@ -1,7 +1,6 @@
 #include "terminal.h"
-#include "drawing.h"
-#include "ramfb.h"
-#include "superheader.h"
+#include "../drawing/drawing.h"
+#include "../drivers/ramfb/ramfb.h"
 
 
 

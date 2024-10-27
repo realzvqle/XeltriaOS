@@ -1,20 +1,12 @@
-#include "patterns.h"
-#include "ramfb.h"
-#include "terminal.h"
-#include "uart.h"
-
-
+#include "sysintegrity/error.h"
+#include "drivers/ramfb/ramfb.h"
 fb_info fb;
 
 extern void KiJumpToUserMode();
 
 
 void KiEntry(void) {
-    //KiSetupExceptionVectorTable();
-    //KiSerialPrint("");
-
-    // will never be reached
-    KiTerminalPrint("Hi!");
+    KiPanic("MANUAL_CRASH");
     while(1) continue;
 }
 

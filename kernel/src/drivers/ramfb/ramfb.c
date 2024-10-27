@@ -1,6 +1,5 @@
 #include "ramfb.h"
-#include "mmio.h"
-#include "superheader.h"
+#include "../mmio.h"
 #include <stdint.h>
 
 

@@ -1,7 +1,7 @@
 #include "error.h"
-#include "drawing.h"
-#include "ramfb.h"
-#include "uart.h"
+#include "../drawing/drawing.h"
+#include "../drivers/ramfb/ramfb.h"
+#include "../drivers/uart/uart.h"
 
 
 extern void KiHaltSystem();

@@ -1,6 +1,6 @@
 #include "uart.h"
-#include "malloc.h"
-#include "mmio.h"
+#include "../../malloc.h"
+#include "../mmio.h"
 
 
 
