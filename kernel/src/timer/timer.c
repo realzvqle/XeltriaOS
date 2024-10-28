@@ -29,3 +29,15 @@ void KiSleep(uint32_t seconds) {
         continue;  
     }
 }
+
+void KiSleepMi(uint32_t milliseconds) {
+    uint64_t start_time = KiGetCounterValue();
+    uint64_t freq = KiGetCounterFrequency();  
+    
+    uint64_t target_ticks = (milliseconds * freq) / 1000;  
+    uint64_t target_time = start_time + target_ticks;
+
+    while (KiGetCounterValue() < target_time) {
+        continue;  
+    }
+}

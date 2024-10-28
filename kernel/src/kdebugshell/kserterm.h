@@ -5,10 +5,10 @@
 
 
 
-#include "../../superheader.h"
+#include "../superheader.h"
 
 
-
+void KiBeginKernelDebuggingShell();
 
 
 

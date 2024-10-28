@@ -93,3 +93,52 @@ float KiCos(float x) {
 
     return 1 - (x2 / KiFactorial(2)) + (x4 / KiFactorial(4)) - (x6 / KiFactorial(6));
 }
+
+void KiSliceStrings(const char* sourcestring, char delimiter, char* firststring, char* secondstring, size_t firstsize, size_t secondsize) {
+    size_t i = 0;
+
+    while (sourcestring[i] != '\0' && sourcestring[i] != delimiter && i < firstsize - 1) {
+        firststring[i] = sourcestring[i];
+        i++;
+    }
+    
+    firststring[i] = '\0';
+
+    if (sourcestring[i] == delimiter) {
+        i++; 
+    }
+
+    size_t j = 0;
+    while (sourcestring[i] != '\0' && j < secondsize - 1) {
+        secondstring[j] = sourcestring[i];
+        i++;
+        j++;
+    }
+    
+    secondstring[j] = '\0';
+}
+
+bool KiStringCompare(char* first_string, char* second_string) {
+    int index = 0;
+    
+    while (true) {
+        if (first_string[index] != second_string[index]) {
+            return false;
+        }
+
+        if (first_string[index] == '\0' && second_string[index] == '\0') {
+            return true;
+        }
+
+        index++;
+    }
+}
+
+
+version KiGetCurrentVersion(){
+    version ver;
+    ver.kver = 0;
+    ver.osver = 0;
+    ver.type = "IN DEVELOPMENT";
+    return ver;
+}

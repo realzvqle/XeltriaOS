@@ -1,12 +1,16 @@
-#include "sysintegrity/error.h"
+#include "kdebugshell/kserterm.h"
 #include "drivers/ramfb/ramfb.h"
+#include "terminal/terminal.h"
+
+
 fb_info fb;
 
 extern void KiJumpToUserMode();
 
 
 void KiEntry(void) {
-    KiPanic("MANUAL_CRASH");
+    KiBeginKernelDebuggingShell();
+    KiTerminalPrint("Hi!");
     while(1) continue;
 }
 

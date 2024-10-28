@@ -12,6 +12,6 @@ void KiSleep(uint32_t seconds);
 uint32_t KiGetTimerValue();
 uint64_t KiGetCounterValue();
 uint64_t KiGetCounterFrequency();
-
+void KiSleepMi(uint32_t milliseconds);
 
 #endif

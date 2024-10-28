@@ -1,7 +1,7 @@
 #include "uart.h"
 #include "../../malloc.h"
 #include "../mmio.h"
-
+#include "../../timer/timer.h"
 
 
 
@@ -40,10 +40,14 @@ static inline char* ArrayAdder(size_t size) {
     while (index < (size - 1)) { 
 
         char character = KiSerialGetChar();
-        if(character == former_char) continue;
+        if(character == former_char){
+            KiSleepMi(50);
+            continue;
+        } 
         if(character == NULL) continue;
         if (character == 'P') {
             array[index] = '\0';  
+            former_char = 'P';
             break;
         }
         array[index] = character; 
@@ -60,8 +64,10 @@ static inline char* ArrayAdder(size_t size) {
 }
 
 
-char* KiSerialGets(int size){
-    KiSerialPrint("\n> ");
+char* KiSerialGets(char* input, int size){
+    KiSerialPutChar('\n');
+    KiSerialPrint(input);
+    KiSerialPrint("> ");
     char* result = ArrayAdder(size);
     KiSerialPrint("\n");
     return result;
