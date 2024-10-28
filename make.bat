@@ -10,10 +10,10 @@ if "%1"=="configure" (
     rd obj /s /q
     rd build /s /q
     del boot.o /f
-    del kernel.exe /f
+    del kernel.elf /f
     cd ..
 ) else if "%1"=="run" (
-    qemu-system-aarch64 -M 6GB -machine virt -cpu cortex-a57 -kernel kernel/kernel.exe -device ramfb  -device virtio-keyboard -display sdl -serial mon:stdio 
+    qemu-system-aarch64 -M 6GB -machine virt -cpu cortex-a57 -kernel kernel/kernel.elf -device ramfb  -device virtio-keyboard -display sdl -serial mon:stdio 
 ) else if "%1"=="build" (
     cd kernel
     xmake build

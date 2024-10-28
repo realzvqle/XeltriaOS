@@ -19,8 +19,7 @@ void KiTerminalPrint(char* status) {
         KiCreateRGB(white, 255, 255, 255);
         init = true;
     }
-    if(!init){
-       
+    if(!init){  
         KiDrawRect(0, 10, HEIGHT - 10, WIDTH, black);
         init = true;
     }               
@@ -31,9 +30,13 @@ void KiTerminalPrint(char* status) {
     line_cursor = 0;
    
     if ((12 * line) >= HEIGHT) {
-        KiDrawRect(0, 10, HEIGHT - 10, WIDTH, black);
-        line = 0;
+        KiClearScreen();
     } 
+}
+
+void KiClearScreen(){
+    KiDrawRect(0, 0, HEIGHT - 10, WIDTH, black);
+    line = 0;
 }
 
 

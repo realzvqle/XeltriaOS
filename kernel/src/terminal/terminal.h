@@ -6,6 +6,6 @@
 #include "../superheader.h"
 
 void KiTerminalPrint(char* status);
-
+void KiClearScreen();
 
 #endif

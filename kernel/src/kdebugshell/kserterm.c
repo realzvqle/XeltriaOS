@@ -4,10 +4,10 @@
 #include "../malloc.h"
 #include "../sysintegrity/error.h"
 #include "../timer/timer.h"
+#include "../terminal/terminal.h"
 
 
-
-char* cmds[] = {"echo", "ver", "exit"};
+char* cmds[] = {"echo", "ver", "exit", "printscr", "clearscr"};
 bool exitshell = false;
 
 static inline void HandleCommands(char* cmd, char* args){
@@ -35,6 +35,12 @@ static inline void HandleCommands(char* cmd, char* args){
                 case 2:
                     exitshell = true;
                     break;
+                case 3:
+                    KiTerminalPrint(args);
+                    break;
+                case 4:
+                    KiClearScreen();
+                    break;
                 default:
                     KiPanic("SWITCH OVERRUN");
                     break;
@@ -49,7 +55,6 @@ void KiBeginKernelDebuggingShell(){
     
     KiSerialPrint("\nXeltriaOS Kernel Serial Debugger Shell\nDo SHIFT+P to Enter\n\n");
     while(exitshell == false){
-
         KiSleepMi(50);
         char* string = KiSerialGets("kdebug", 1024);
         char cmd[512];
