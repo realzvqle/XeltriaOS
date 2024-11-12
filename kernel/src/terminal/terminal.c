@@ -35,8 +35,8 @@ void KiTerminalPrint(char* status) {
 }
 
 void KiClearScreen(){
-    KiDrawRect(0, 0, HEIGHT - 10, WIDTH, black);
-    line = 0;
+    KiDrawRect(0, 0, HEIGHT, WIDTH, black);
+    //line = 0;
 }
 
 

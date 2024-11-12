@@ -41,3 +41,23 @@ void KiSleepMi(uint32_t milliseconds) {
         continue;  
     }
 }
+
+void KiSleepMicro(uint32_t microseconds) {
+    uint64_t start_time = KiGetCounterValue();
+    uint64_t freq = KiGetCounterFrequency();  
+    
+    uint64_t target_ticks = (microseconds * freq) / 1000000;  
+    uint64_t target_time = start_time + target_ticks;
+
+    while (KiGetCounterValue() < target_time) {
+        continue;  
+    }
+}
+
+uint32_t KiGetElapsedMicroseconds(uint64_t start_time) {
+    uint64_t end_time = KiGetCounterValue();
+    uint64_t elapsed_ticks = end_time - start_time;
+    uint64_t freq = KiGetCounterFrequency();
+    uint32_t elapsed_microseconds = (elapsed_ticks * 1000000) / freq;
+    return elapsed_microseconds;
+}
