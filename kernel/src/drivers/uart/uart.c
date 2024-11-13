@@ -22,10 +22,17 @@ void KiSerialPrint(const char *s) {
     }
 }
 
+#define UART_FR_OFFSET 0x18
+#define UART_FR_RXFE (1 << 4) 
+
 char KiSerialGetChar() {
+    while (*(volatile uint32_t *)(uart + UART_FR_OFFSET) & UART_FR_RXFE);
     return KiRead8(uart);
 }
-
+char KiSerialGetCharNonWait() {
+    //while (*(volatile uint32_t *)(uart + UART_FR_OFFSET) & UART_FR_RXFE);
+    return KiRead8(uart);
+}
 static inline char* ArrayAdder(size_t size) {
     char* array = (char*)KiAllocateMemory(size);
     //if (!array) return NULL;  
@@ -40,10 +47,10 @@ static inline char* ArrayAdder(size_t size) {
     while (index < (size - 1)) { 
 
         char character = KiSerialGetChar();
-        if(character == former_char){
-            KiSleepMi(50);
-            continue;
-        } 
+        // if(character == former_char){
+        //     KiSleepMi(50);
+        //     continue;
+        // } 
         if(character == NULL) continue;
         if (character == 'P') {
             array[index] = '\0';  

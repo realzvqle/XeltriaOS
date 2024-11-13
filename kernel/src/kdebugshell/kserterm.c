@@ -9,9 +9,11 @@
 #include "../drawing/drawing.h"
 #include "../tasks/tasks.h"
 
-char* cmds[] = {"echo", "ver", "exit", "printscr", "clearscr", "task"};
+char* cmds[] = {"echo", "ver", "exit", "printscr", "clearscr", "createtask", "pushback"};
 bool exitshell = false;
 
+extern uint16_t tasknum;
+extern Task tasks[MAX_TASKS];
 
 static inline uint8_t TaskTest(){
     int x = KiGenerateRandomValueWithinRange(KiGetCounterValue(), 0, WIDTH);
@@ -63,6 +65,23 @@ static inline void HandleCommands(char* cmd, char* args){
                     break;
             
                 }
+                case 6:
+                {   
+                    if(tasknum > 2){
+                        if(tasknum != 2) tasknum--;
+                        tasks[tasknum].run = false;
+                    } 
+                    else{
+                        if(tasknum == 2){
+                            if(tasks[tasknum].run == true){
+                                tasks[tasknum].run = false;
+                                break;
+                            }
+                        }
+                        KiSerialPrint("Cannot Push Back, No Task Found\n");
+                    } 
+                    break;
+                }
                 default:
                     KiPanic("SWITCH OVERRUN");
                     break;
@@ -85,6 +104,8 @@ void KiBeginKernelDebuggingShell(){
         KiFreeMemory(string);
         KiSerialPutChar('\0');
     }
+    exitshell = false;
+    return;
 }
 
 

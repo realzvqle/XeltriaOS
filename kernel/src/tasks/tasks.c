@@ -46,6 +46,10 @@ void KiSystemTickHandler(){
 }
 
 void XeCreateTask(uint16_t period, uint8_t (*taskfunction)()){
+    if(tasknum >= MAX_TASKS - 1){
+        KiSerialPrint("Task Array is Full, Delete a Task to make a new one\n");
+        return;
+    } 
     tasks[tasknum].taskfunction = taskfunction;
     tasks[tasknum].period = period;
     tasks[tasknum].run = true;
