@@ -1,6 +1,7 @@
 #include "drawing/drawing.h"
 #include "drivers/ramfb/ramfb.h"
-#include "terminal/terminal.h"
+#include "drivers/uart/uart.h"
+#include "kdebugshell/kserterm.h"
 #include "timer/timer.h"
 #include "tasks/tasks.h"
 #include "drivers/ramfb/ramfb.h"
@@ -29,23 +30,17 @@ uint8_t task2(){
 }
 
 uint8_t task3(){
-    uint8_t rgb[3] = {0, 255, 0};
+    uint8_t rgb[3] = {0, 255, 255};
     KiDrawRect(100, 100, 200, 200, rgb);
     return 0;
 }
 void KiEntry(void) {
+    // task 0 will always exist
     tasks[1].period = 70;
     tasks[1].taskfunction = task1;
     tasks[1].run = true;
-    tasks[2].period = 1;
-    tasks[2].taskfunction = task2;
-    tasks[2].run = true;
-    tasks[3].period = 1;
-    tasks[3].taskfunction = task3;
-    tasks[3].run = true;
-    tasks[4].period = 1;
-    tasks[4].taskfunction = task4;
-    tasks[4].run = true;
+    tasks[1].loop = true;
+    KiBeginKernelDebuggingShell();
     while(1){
         KiSystemTickHandler();
         KiSleepMi(10);

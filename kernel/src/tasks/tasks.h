@@ -15,8 +15,10 @@ typedef struct _Task{
     uint16_t delay;
     uint16_t period;
     bool run;
+    bool loop;
 } Task;
 
 void KiSystemTickHandler();
+void XeCreateTask(uint16_t period, uint8_t (*taskfunction)());
 
 #endif

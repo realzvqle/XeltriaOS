@@ -1,9 +1,9 @@
-#include "kistdlib.h"
+#include "runtimelib.h"
 
 
 
 
-char* KiStrCat(char* destination, const char* source) {
+char* RtlStringConcatnate(char* destination, const char* source) {
     char* dest = destination;
 
     while (*dest != '\0') {
@@ -18,7 +18,7 @@ char* KiStrCat(char* destination, const char* source) {
     return destination;
 }
 
-char* KiItoA(int num, char* str) {
+char* RtlIntegerToAscii(int num, char* str) {
     int i = 0;
     int isNegative = 0;
     if (num < 0) {
@@ -48,11 +48,11 @@ char* KiItoA(int num, char* str) {
 }
 
 
-double KiFabs(double x) {
+double RtlFabs(double x) {
     return (x < 0) ? -x : x;
 }
 
-double KiPow(double base, int exp) {
+double RtlPow(double base, int exp) {
     double result = 1.0;
     for (int i = 0; i < exp; i++) {
         result *= base;
@@ -61,7 +61,7 @@ double KiPow(double base, int exp) {
 }
 
 
-float KiFactorial(int n) {
+float RtlFactorial(int n) {
     float result = 1.0f;
     for (int i = 2; i <= n; ++i) {
         result *= i;
@@ -69,32 +69,32 @@ float KiFactorial(int n) {
     return result;
 }
 
-float KiNormAngle(float x) {
+float RtlNormAngle(float x) {
     const float PI = 3.14159265358979323846f;
     while (x > PI) x -= 2 * PI;
     while (x < -PI) x += 2 * PI;
     return x;
 }
 
-float KiSin(float x) {
-    x = KiNormAngle(x);  
+float RtlSin(float x) {
+    x = RtlNormAngle(x);  
     float x3 = x * x * x;
     float x5 = x3 * x * x;
     float x7 = x5 * x * x;
 
-    return x - (x3 / KiFactorial(3)) + (x5 / KiFactorial(5)) - (x7 / KiFactorial(7));
+    return x - (x3 / RtlFactorial(3)) + (x5 / RtlFactorial(5)) - (x7 / RtlFactorial(7));
 }
 
-float KiCos(float x) {
-    x = KiNormAngle(x);  
+float RtlCos(float x) {
+    x = RtlNormAngle(x);  
     float x2 = x * x;
     float x4 = x2 * x * x;
     float x6 = x4 * x * x;
 
-    return 1 - (x2 / KiFactorial(2)) + (x4 / KiFactorial(4)) - (x6 / KiFactorial(6));
+    return 1 - (x2 / RtlFactorial(2)) + (x4 / RtlFactorial(4)) - (x6 / RtlFactorial(6));
 }
 
-void KiSliceStrings(const char* sourcestring, char delimiter, char* firststring, char* secondstring, size_t firstsize, size_t secondsize) {
+void RtlSliceStrings(const char* sourcestring, char delimiter, char* firststring, char* secondstring, size_t firstsize, size_t secondsize) {
     size_t i = 0;
 
     while (sourcestring[i] != '\0' && sourcestring[i] != delimiter && i < firstsize - 1) {
@@ -118,7 +118,7 @@ void KiSliceStrings(const char* sourcestring, char delimiter, char* firststring,
     secondstring[j] = '\0';
 }
 
-bool KiStringCompare(char* first_string, char* second_string) {
+bool RtlStringCompare(char* first_string, char* second_string) {
     int index = 0;
     
     while (true) {
@@ -135,10 +135,38 @@ bool KiStringCompare(char* first_string, char* second_string) {
 }
 
 
-version KiGetCurrentVersion(){
+version RtlGetCurrentVersion(){
     version ver;
     ver.kver = 0;
     ver.osver = 0;
     ver.type = "IN DEVELOPMENT";
     return ver;
+}
+
+int RtlAsciiToInteger(const char *str) {
+    int sign = 1;
+    int result = 0;
+    int i = 0;
+
+    while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n') {
+        i++;
+    }
+
+    if (str[i] == '-' || str[i] == '+') {
+        sign = (str[i] == '-') ? -1 : 1;
+        i++;
+    }
+
+    while (str[i] >= '0' && str[i] <= '9') {
+        int digit = str[i] - '0';
+
+        if (result > (INT_MAX - digit) / 10) {
+            return (sign == 1) ? INT_MAX : INT_MIN;
+        }
+
+        result = result * 10 + digit;
+        i++;
+    }
+
+    return result * sign;
 }
