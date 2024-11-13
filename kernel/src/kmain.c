@@ -1,6 +1,5 @@
 #include "drawing/drawing.h"
 #include "drivers/ramfb/ramfb.h"
-#include "drivers/uart/uart.h"
 #include "kdebugshell/kserterm.h"
 #include "timer/timer.h"
 #include "tasks/tasks.h"
