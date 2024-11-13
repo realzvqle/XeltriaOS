@@ -9,7 +9,7 @@
 #include "../drawing/drawing.h"
 #include "../tasks/tasks.h"
 
-char* cmds[] = {"echo", "ver", "exit", "printscr", "clearscr", "createtask", "pushback"};
+char* cmds[] = {"echo", "ver", "exit", "printscr", "clearscr", "createtask", "pushback", "listask"};
 bool exitshell = false;
 
 extern uint16_t tasknum;
@@ -82,6 +82,9 @@ static inline void HandleCommands(char* cmd, char* args){
                     } 
                     break;
                 }
+                case 7:
+                    XeListTasks();
+                    break;
                 default:
                     KiPanic("SWITCH OVERRUN");
                     break;

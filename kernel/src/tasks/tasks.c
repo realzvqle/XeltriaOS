@@ -32,6 +32,7 @@ static void KiTaskSchedular() {
                 PrintTaskResults(elapsed_microseconds, i);
                 tasks[i].delay = tasks[i].period;
                 if(result == 1) tasks[i].run = false;
+                tasks[i].latesttime = elapsed_microseconds;
             } else {
                 tasks[i].delay--;
             }
@@ -54,4 +55,23 @@ void XeCreateTask(uint16_t period, uint8_t (*taskfunction)()){
     tasks[tasknum].period = period;
     tasks[tasknum].run = true;
     tasknum++;
+}
+
+void XeListTasks(){
+    for(int i = 1; i < tasknum; i++){
+        char latesttime[512];
+        RtlIntegerToAscii(tasks[i].latesttime, latesttime);
+        char period[512];
+        RtlIntegerToAscii(tasks[i].period, period);
+        char currenttask[512];
+        RtlIntegerToAscii(i, currenttask);
+        KiSerialPrint("\n--------------------------------------\n");
+        KiSerialPrint("Task ");
+        KiSerialPrint(currenttask);
+        KiSerialPrint("\nPeriod -> ");
+        KiSerialPrint(period);
+        KiSerialPrint("\nLatest Time -> ");
+        KiSerialPrint(latesttime);
+        KiSerialPrint("\n--------------------------------------\n");
+    }
 }

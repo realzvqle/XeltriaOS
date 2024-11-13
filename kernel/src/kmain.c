@@ -17,30 +17,14 @@ uint8_t task1(){
     return 0;
 }
 
-uint8_t task4(){
-    uint8_t rgb[3] = {0, 255, 255};
-    KiDrawRect(700, 700, 200, 200, rgb);
-    return 0;
-}
 
-uint8_t task2(){
-    uint8_t rgb[3] = {255, 255, 0};
-    KiDrawRect(400, 400, 9, 9, rgb);
-    return 0;
-}
-
-uint8_t task3(){
-    uint8_t rgb[3] = {0, 255, 255};
-    KiDrawRect(100, 100, 200, 200, rgb);
-    return 0;
-}
 void KiEntry(void) {
     // task 1 will always exist, it is what clears the screen
     tasks[1].period = 70;
     tasks[1].taskfunction = task1;
     tasks[1].run = true;
     tasks[1].loop = true;
-    
+
     KiBeginKernelDebuggingShell();
     while(1){
         if(KiSerialGetCharNonWait() == 'X') KiBeginKernelDebuggingShell();
