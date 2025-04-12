@@ -3,3 +3,4 @@ kernel.elf
 obj/
 .xmake/
 build/
+nil/

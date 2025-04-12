@@ -1,5 +1,6 @@
 clean:
 	rm -rf .xmake
+	rm -rf nil
 	rm -rf obj
 	rm -rf build
 	rm boot.o

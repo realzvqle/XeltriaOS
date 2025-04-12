@@ -14,7 +14,7 @@ char KiReadUart(){
 }
 
 char KiReadUartAndWait(){
-    // read and wait
+    // read and wait, didn't implement this yet =(
     return '?';
 }
 
