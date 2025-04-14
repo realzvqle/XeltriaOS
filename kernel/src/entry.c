@@ -1,29 +1,17 @@
 #include "allocator/heap/heap.h"
+#include "bugcheck/bugcheck.h"
+#include "devices/memory.h"
 #include "devices/uart/uart.h"
 #include "time/time.h"
-
+#include "exceptions/exceptions.h"
 
 
 void KiEntry(void) {
+    KiSetupExceptions();
     KiPrintStringToUart("\n\n! XeltriaOS !\n\n");
-    KiPrintStringToUart("Heap Allocator Test\n\n");
-    KHEAP heap;
-    bool result = KeInitializeHeapMemory(&heap, 1000);
-    if(!result){
-        KiPrintStringToUart("Failed to Create Heap Memory\n");
-        while(1){continue;}
-    }
-    char* hi = KeAllocateHeapMemory(&heap, 3);
-    hi[0] = 's';
-    hi[1] = 'i';
-    hi[2] = '\0';
-    char* qi = KeAllocateHeapMemory(&heap, 3);
-    qi[0] = 'p';
-    qi[1] = 'i';
-    qi[2] = '\0';
-    KiPrintStringToUart(hi);
-    KiPrintStringToUart(qi);
-    KiPrintStringToUart(hi);
+
+    // causes an exception
+    KiWriteToMemory64(0x50000000, 10);
     while(1){
         KiWait(10);
     }

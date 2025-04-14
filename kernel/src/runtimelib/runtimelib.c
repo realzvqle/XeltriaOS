@@ -1,5 +1,5 @@
 #include "runtimelib.h"
-
+#include "../devices/uart/uart.h"
 
 
 // scuffed impl
@@ -30,4 +30,13 @@ char* RtlIntegerToAscii(int num, char* str) {
     str[i] = '\0';
 
     return str;
+}
+
+
+void RtlPrintUnsigned64IntegerIntoUart(char* prev, uint64_t integer){
+    KiPrintStringToUart(prev);
+    char buffer[512];
+    RtlIntegerToAscii(integer, buffer);
+    KiPrintStringToUart(buffer);
+    KiPrintStringToUart("\n");
 }
