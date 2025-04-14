@@ -1,4 +1,4 @@
-#include "allocator/pool/pool.h"
+#include "allocator/heap/heap.h"
 #include "devices/uart/uart.h"
 #include "time/time.h"
 
@@ -7,29 +7,23 @@
 void KiEntry(void) {
     KiPrintStringToUart("\n\n! XeltriaOS !\n\n");
     KiPrintStringToUart("Heap Allocator Test\n\n");
-    KPOOL firstpool;
-    KPOOL secondpool;
-    KPOOL thirdpool;
-    bool result = KeInitializePoolMemory(&firstpool, 30, 20);
+    KHEAP heap;
+    bool result = KeInitializeHeapMemory(&heap, 1000);
     if(!result){
-        KiPrintStringToUart("Failure to Create First Pool Memory\n");
+        KiPrintStringToUart("Failed to Create Heap Memory\n");
+        while(1){continue;}
     }
-    result = KeInitializePoolMemory(&secondpool, 30, 20);
-    if(!result){
-        KiPrintStringToUart("Failure to Create Second Pool Memory\n");
-    }
-    char* hi = KeAllocatePoolMemory(&firstpool);
+    char* hi = KeAllocateHeapMemory(&heap, 3);
     hi[0] = 's';
     hi[1] = 'i';
-    hi[3] = '\n';
-    hi[4] = '\0';
-    char* qi = KeAllocatePoolMemory(&secondpool);
-    qi[0] = 'q';
+    hi[2] = '\0';
+    char* qi = KeAllocateHeapMemory(&heap, 3);
+    qi[0] = 'p';
     qi[1] = 'i';
-    qi[3] = '\n';
-    qi[4] = '\0';
+    qi[2] = '\0';
     KiPrintStringToUart(hi);
     KiPrintStringToUart(qi);
+    KiPrintStringToUart(hi);
     while(1){
         KiWait(10);
     }

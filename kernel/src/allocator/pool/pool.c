@@ -22,7 +22,7 @@ bool KeInitializePoolMemory(KPOOL* pool, uint32_t size, uint32_t singleAllocatio
 }
 
 void* KeAllocatePoolMemory(KPOOL* pool){
-    if(pool->current > pool->end){
+    if(pool->current + pool->singAlloc > pool->end){
         return NULL;
     }
     int cur = pool->current;
