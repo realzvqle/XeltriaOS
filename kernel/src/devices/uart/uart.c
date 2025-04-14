@@ -1,5 +1,6 @@
 #include "uart.h"
-#include "../mmio.h"
+#include "../memory.h"
+#include <stdint.h>
 
 
 
@@ -13,10 +14,14 @@ char KiReadUart(){
     return KiReadMemory64(0x09000000);
 }
 
+
 char KiReadUartAndWait(){
-    // read and wait, didn't implement this yet =(
+    // not implemented
     return '?';
 }
+
+
+
 
 void KiPrintStringToUart(const char* string){
     while(*string != '\0'){

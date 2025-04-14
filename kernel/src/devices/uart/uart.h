@@ -10,8 +10,8 @@
 
 
 void KiWriteToUart(char c);
+char KiReadUartAndWait();
 char KiReadUart();
 void KiPrintStringToUart(const char* string);
-
 
 #endif

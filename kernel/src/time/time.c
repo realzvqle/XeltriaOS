@@ -11,6 +11,11 @@ uint64_t KiGetSeconds(){
     return KiReturnTimeFromRealtimeClock();
 }
 
+uint64_t KiGetMilliseconds(){
+    // not implemented
+    return 0;
+}
+
 
 void KiWait(uint32_t seconds){
     int prev = KiGetSeconds();
