@@ -1,5 +1,3 @@
-#include "allocator/heap/heap.h"
-#include "bugcheck/bugcheck.h"
 #include "devices/memory.h"
 #include "devices/uart/uart.h"
 #include "time/time.h"
